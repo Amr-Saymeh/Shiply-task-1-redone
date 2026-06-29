@@ -16,7 +16,7 @@
 git clone https://github.com/Amr-Saymeh/Shiply-task-1-redone.git
 ```
 ```bash 
-cd Shiply-task-1
+cd Shiply-task-1-redone
 ```
 ---
 
