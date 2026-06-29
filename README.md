@@ -13,7 +13,7 @@
 
 ### 1. Clone the project
 ```bash 
-git clone https://github.com/Amr-Saymeh/Shiply-task-1.git
+git clone https://github.com/Amr-Saymeh/Shiply-task-1-redone.git
 ```
 ```bash 
 cd Shiply-task-1
