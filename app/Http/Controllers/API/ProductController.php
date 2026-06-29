@@ -32,11 +32,10 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request): JsonResponse
     {
-        $product = auth()->user()->products()->create($request->all());
-
-        if (isset($request->categories)) {
-            $categories = Category::ForUserByIds($request->categories);
-
+        $validated = $request->validated();
+        $product = auth()->user()->products()->create($validated);
+        if (!empty($validated['categories'] ?? [])) {            
+            $categories = Category::ForUserByIds($validated['categories']);
             if (!$categories->isEmpty()) {
                 $product->categories()->attach($categories);
             }
@@ -68,9 +67,9 @@ class ProductController extends Controller
         if (!$this->canAccess($product)) {
             return $this->error(AuthConstants::PERMISSION);
         }
-
-        if (isset($request->categories)) {
-            $categories = Category::ForUserByIds($request->categories);
+        $validated = $request->validated();
+        if (isset($validated['categories'])) {
+            $categories = Category::ForUserByIds($validated['categories']);
 
             $product->categories()->detach();
             if (!$categories->isEmpty()) {
@@ -78,7 +77,7 @@ class ProductController extends Controller
             }
         }
 
-        $product->update($request->all());
+        $product->update($validated);
 
         return $this->success(new ProductResource($product), ProductConstants::UPDATE);
     }
