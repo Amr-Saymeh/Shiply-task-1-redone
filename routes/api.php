@@ -7,13 +7,11 @@ use App\Http\Controllers\API\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('login', [LoginController::class, 'login']);
-Route::post('register', [RegisterController::class, '__invoke']);
+Route::post('register', RegisterController::class);
 
 Route::group(['middleware' => 'api.auth'], function () {
     Route::get('user', [LoginController::class, 'details']);
     Route::get('logout', [LoginController::class, 'logout']);
-
-    Route::get('product/search', [ProductController::class, 'search']);
 
     Route::apiResource('product', ProductController::class);
     Route::apiResource('category', CategoryController::class);
