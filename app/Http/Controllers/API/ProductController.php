@@ -97,16 +97,4 @@ class ProductController extends Controller
 
         return $this->success([], ProductConstants::DESTROY);
     }
-    public function search(Request $request): JsonResponse
-    {
-        $name = trim($request->query('name', ''));
-
-        if ($name === '') {
-            return $this->success(ProductResource::collection(collect()));
-        }
-
-        $products = Product::ForUser()->where('name', 'LIKE', "%{$name}%")->get();
-
-        return response()->json(ProductResource::collection($products));
-    }
 }
