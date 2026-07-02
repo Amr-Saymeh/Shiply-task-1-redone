@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+
 class ProductRequest extends FormRequest
 {
     /**
@@ -12,16 +12,8 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:4|max:255',
-
-            'price' => 'required|numeric|min:0',
-
-            'categories' => 'nullable|array',
-
-            'categories.*' => [
-                'integer',
-                Rule::exists('categories', 'id'),
-            ],
+            'name' => 'required|min:4',
+            'price' => 'required|numeric',
         ];
     }
 }
